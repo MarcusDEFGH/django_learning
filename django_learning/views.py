@@ -1,12 +1,9 @@
 from django.http import HttpResponse
+from django.shortcuts import render
 
 
 def hello(request):
-    return HttpResponse('Hello')
-
-
-def articles(request, year):
-    return HttpResponse('And the year was {}...'.format(year))
+    return render(request, 'index.html')
 
 
 def get_person(name):
@@ -20,11 +17,10 @@ def get_person(name):
         if person['name'] == name:
             return person
         else:
-            return 'Name not found'
+            return {'name': 'Not Found', 'age': 0}
 
 
 def person(request, name):
     person = get_person(name)
-    return HttpResponse('Person found! \
-                        Name: {} Age: {}'.format(
-                        person['name'], person['age']))
+    return render(request, 'person.html',
+                  {'name': person['name'], 'age': person['age']})
