@@ -9,8 +9,11 @@
 <body>
     <ul>
         {% for client in clients %}
-            <li>{{ client.first_name }}</li>
+            <li><a href="{% url 'update_client' client.id %}">{{ client.first_name }}</a></li>
+            <a href="{% url 'delete_client' client.id %}">Delete</a>
         {% endfor %}
     </ul>
+
+    <a href="{% url 'new_client' %}">Add new client</a>
 </body>
 </html>
